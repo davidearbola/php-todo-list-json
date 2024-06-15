@@ -35,9 +35,9 @@
         <div class="container text-center">
             <div class="mb-2">
                 <label for="toDo">Add ToDo</label><br>
-                <input @keyup.enter="addToDo(valueInput, toDoList)" type="text" id="toDo" v-model="valueInput"
+                <input @keyup.enter="addToDo(valueInput)" type="text" id="toDo" v-model="valueInput"
                     placeholder="Scrivi il ToDo">
-                <button @click="addToDo(valueInput, toDoList)" class="btn btn-dark">Add</button>
+                <button @click="addToDo(valueInput)" class="btn btn-dark">Add</button>
             </div>
             <div class="mb-2">
                 <p v-for="elemento, i in toDoList">{{elemento.stringa}}

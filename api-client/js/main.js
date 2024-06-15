@@ -9,12 +9,25 @@ createApp({
 			valueInput: "",
 			badgeToDo: "ToDo",
 			badgeDone: "Done",
+			apiUrlAdd: "../add.php",
+			apiUrlGet: "../list.php",
+			getConfigRequest: {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			},
 		};
 	},
 	methods: {
-		addToDo(valore, array) {
-			array.push({ stringa: valore, done: false });
-			this.valueInput = "";
+		addToDo(valore) {
+			const newToDo = { stringa: valore, done: false };
+			axios
+				.post(this.apiUrlAdd, newToDo, this.getConfigRequest)
+				.then((results) => {
+					console.log(results.data);
+					this.toDoList = results.data;
+					this.valueInput = "";
+				});
 		},
 		falseToDo(array, indice) {
 			array[indice].done = false;
@@ -27,7 +40,7 @@ createApp({
 		},
 	},
 	mounted() {
-		axios.get("../list.php").then((results) => {
+		axios.get(this.apiUrlGet).then((results) => {
 			this.toDoList = results.data;
 		});
 	},
