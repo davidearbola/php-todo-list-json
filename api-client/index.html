@@ -41,9 +41,9 @@
             </div>
             <div class="mb-2">
                 <p v-for="elemento, i in toDoList">{{elemento.stringa}}
-                    <span @click="falseToDo(toDoList,i)" :class="{'d-none': (elemento.done == false)}"
+                    <span @click="updateToDoStatus(i, false)" :class="{'d-none': (elemento.done == false)}"
                         class="badge rounded-pill text-bg-success">{{badgeDone}}</span>
-                    <span @click="trueToDo(toDoList,i)" :class="{'d-none': (elemento.done == true)}"
+                    <span @click="updateToDoStatus(i, true)" :class="{'d-none': (elemento.done == true)}"
                         class="badge rounded-pill text-bg-danger">{{badgeToDo}}</span>
                     <span @click="removeToDo(i)" class="ms-2 text-danger"><i class="fa-solid fa-delete-left"></i></span>
                 </p>

@@ -11,6 +11,7 @@ createApp({
 			badgeDone: "Done",
 			apiUrlAdd: "../add.php",
 			apiUrlRemove: "../remove.php",
+			apiUrlUpdate: "../update.php",
 			apiUrlGet: "../list.php",
 			getConfigRequest: {
 				headers: {
@@ -30,11 +31,13 @@ createApp({
 					this.valueInput = "";
 				});
 		},
-		falseToDo(array, indice) {
-			array[indice].done = false;
-		},
-		trueToDo(array, indice) {
-			array[indice].done = true;
+		updateToDoStatus(index, status) {
+			const updateData = { indice: index, done: status };
+			axios
+				.post(this.apiUrlUpdate, updateData, this.getConfigRequest)
+				.then((results) => {
+					this.toDoList = results.data;
+				});
 		},
 		removeToDo(index) {
 			const indice = { indice: index };
