@@ -27,7 +27,7 @@ createApp({
 		},
 	},
 	mounted() {
-		axios.get("./api-client/api.php").then((results) => {
+		axios.get("../api.php").then((results) => {
 			this.toDoList = results.data;
 		});
 	},
