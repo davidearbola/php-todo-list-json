@@ -40,7 +40,7 @@ createApp({
 		},
 	},
 	mounted() {
-		axios.get(this.apiUrlGet).then((results) => {
+		axios.get(this.apiUrlAdd).then((results) => {
 			this.toDoList = results.data;
 		});
 	},

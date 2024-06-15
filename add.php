@@ -15,7 +15,12 @@ if (isset($_POST['stringa']) && isset($_POST['done'])) {
     // converto l'array in file json
     $fileContent = json_encode($toDoList);
     // scrivo il file su disco
-    file_put_contents('dati.json', $fileContent);
+    // if (file_put_contents("dati.json", $fileContent) === false) {
+    //     error_log("Errore nella scrittura del file");
+    // } else {
+    //     error_log("Scrittura avvenuta con successo");
+    // }
+    file_put_contents("dati.json", $fileContent);
 }
 
 header('Content-Type: application/json');
