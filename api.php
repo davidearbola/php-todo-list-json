@@ -63,6 +63,12 @@ if ($_request == 'add') {
     $fileContent = json_encode($toDoList);
     // scrivo il file su disco
     file_put_contents("dati.json", $fileContent);
+    // se ricevo richiesta di show
+} elseif (isset($_GET['request']) == 'show') {
+    // imposto l'header
+    header('Content-Type: application/json');
+    // stampo
+    echo $fileContent;
 }
 
 
