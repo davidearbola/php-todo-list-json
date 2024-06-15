@@ -9,9 +9,7 @@ createApp({
 			valueInput: "",
 			badgeToDo: "ToDo",
 			badgeDone: "Done",
-			apiUrlAdd: "../add.php",
-			apiUrlRemove: "../remove.php",
-			apiUrlUpdate: "../update.php",
+			apiUrlPost: "../api.php",
 			apiUrlGet: "../list.php",
 			getConfigRequest: {
 				headers: {
@@ -22,9 +20,9 @@ createApp({
 	},
 	methods: {
 		addToDo(valore) {
-			const newToDo = { stringa: valore, done: false };
+			const addData = { stringa: valore, done: false, request: "add" };
 			axios
-				.post(this.apiUrlAdd, newToDo, this.getConfigRequest)
+				.post(this.apiUrlPost, addData, this.getConfigRequest)
 				.then((results) => {
 					console.log(results.data);
 					this.toDoList = results.data;
@@ -32,23 +30,32 @@ createApp({
 				});
 		},
 		updateToDoStatus(index, status) {
-			const updateData = { indice: index, done: status };
+			const updateData = {
+				indice: index,
+				done: status,
+				request: "update",
+			};
 			axios
-				.post(this.apiUrlUpdate, updateData, this.getConfigRequest)
+				.post(this.apiUrlPost, updateData, this.getConfigRequest)
 				.then((results) => {
 					this.toDoList = results.data;
 				});
 		},
 		removeToDo(index) {
-			const indice = { indice: index };
+			const removeData = { indice: index, request: "remove" };
 			axios
-				.post(this.apiUrlRemove, indice, this.getConfigRequest)
+				.post(this.apiUrlPost, removeData, this.getConfigRequest)
 				.then(() => {
 					this.toDoList.splice(index, 1);
 				});
 		},
-		removeList() {
-			this.toDoList = [];
+		deleteList() {
+			const deleteList = { request: "delete" };
+			axios
+				.post(this.apiUrlPost, deleteList, this.getConfigRequest)
+				.then(() => {
+					this.toDoList = [];
+				});
 		},
 	},
 	mounted() {
