@@ -45,6 +45,7 @@
                         class="badge rounded-pill text-bg-success">{{badgeDone}}</span>
                     <span @click="trueToDo(toDoList,i)" :class="{'d-none': (elemento.done == true)}"
                         class="badge rounded-pill text-bg-danger">{{badgeToDo}}</span>
+                    <span @click="removeToDo(i)" class="ms-2 text-danger"><i class="fa-solid fa-delete-left"></i></span>
                 </p>
             </div>
             <div>

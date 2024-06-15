@@ -3,15 +3,11 @@
 $fileContent = file_get_contents("dati.json");
 
 // controllo di aver ricevuto i dati
-if (isset($_POST['stringa']) && isset($_POST['done'])) {
-    // cambio $_POST['done'] da stringa a valore booleano
-    $booleano = ($_POST['done'] == 'true' ? true : false);
+if (isset($_POST['indice'])) {
     // converto il file json che ho recuperato sopra e lo faccio diventare un array associativo(php)
     $toDoList = json_decode($fileContent, true);
-    // creo un nuovo todo
-    $newToDo = ['stringa' => $_POST['stringa'], 'done' => $booleano];
-    // pusho il nuovo todo in todolist
-    $toDoList[] = $newToDo;
+    // cancello l'elemento dall'array
+    array_splice($toDoList, $_POST['indice'], 1);
     // converto l'array in file json
     $fileContent = json_encode($toDoList);
     // scrivo il file su disco

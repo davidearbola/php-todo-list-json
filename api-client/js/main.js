@@ -10,6 +10,7 @@ createApp({
 			badgeToDo: "ToDo",
 			badgeDone: "Done",
 			apiUrlAdd: "../add.php",
+			apiUrlRemove: "../remove.php",
 			apiUrlGet: "../list.php",
 			getConfigRequest: {
 				headers: {
@@ -35,12 +36,20 @@ createApp({
 		trueToDo(array, indice) {
 			array[indice].done = true;
 		},
+		removeToDo(index) {
+			const indice = { indice: index };
+			axios
+				.post(this.apiUrlRemove, indice, this.getConfigRequest)
+				.then(() => {
+					this.toDoList.splice(index, 1);
+				});
+		},
 		removeList() {
 			this.toDoList = [];
 		},
 	},
 	mounted() {
-		axios.get(this.apiUrlAdd).then((results) => {
+		axios.get(this.apiUrlGet).then((results) => {
 			this.toDoList = results.data;
 		});
 	},
